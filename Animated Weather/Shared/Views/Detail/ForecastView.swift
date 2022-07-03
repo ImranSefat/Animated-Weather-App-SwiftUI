@@ -19,14 +19,28 @@ struct ForecastView: View {
                 // MARK: Forecast Cards
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12){
-                        ForEach(Forecast.hourly) { forecast in
-                            ForecastCard(forecast: forecast, forecasePeriod: .hourly)
-                            
+                        if selection == 0 {
+                            ForEach(Forecast.hourly) { forecast in
+                                ForecastCard(forecast: forecast, forecasePeriod: .hourly)
+                                
+                            }
+                            .transition(.offset(x: -450))
+                        } else {
+                            ForEach(Forecast.daily) { forecast in
+                                ForecastCard(forecast: forecast, forecasePeriod: .daily)
+                                
+                            }
+                            .transition(.offset(x: 450))
                         }
                     }
                     .padding(.vertical, 20)
+                    
+                    
                 }
                 .padding(.horizontal, 20)
+                
+                // MARK: Forecast Widget
+                Image("Forecast Widgets")
             }
         }        
         .backgroundBlur(radius: 25, opaque: true)
